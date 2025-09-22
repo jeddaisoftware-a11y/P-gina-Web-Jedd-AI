@@ -175,7 +175,6 @@
     const links = document.querySelectorAll('.main-nav a');
     const scrollToTopBtn = document.getElementById('scroll-to-top');
 
-    // Mueve la lógica del scroll-to-top aquí, ya que es la única que queda.
     scrollToTopBtn.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
@@ -183,30 +182,26 @@
         });
     });
 
-    // Observador para el header
     window.addEventListener('scroll', () => {
         header.classList.toggle('shrink', window.scrollY > 10);
         scrollToTopBtn.classList.toggle('show', window.scrollY > 300);
     });
 
-    // Observador para la animación de la sección "Nosotros"
     const nosotrosObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('in-view'); // Añade la clase para activar la animación
+                entry.target.classList.add('in-view');
             } else {
-                // Opcional: Para resetear la animación cuando sales de la sección
                 entry.target.classList.remove('in-view');
             }
         });
-    }, { threshold: 0.5 }); // Detecta cuando el 50% de la sección es visible
+    }, { threshold: 0.5 });
 
     const nosotrosSection = document.getElementById('nosotros');
     if (nosotrosSection) {
         nosotrosObserver.observe(nosotrosSection);
     }
 
-    // Observador para la transición de las demás secciones tipo "Canva"
     const panels = document.querySelectorAll('.panel');
     const panelObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -214,13 +209,12 @@
                 entry.target.classList.add('visible');
             }
         });
-    }, { threshold: 0.2 }); // Umbral bajo para que la animación se dispare pronto
+    }, { threshold: 0.2 });
 
     panels.forEach(panel => {
         panelObserver.observe(panel);
     });
 
-    // Mantiene la lógica del modo oscuro, ya que es correcta
     const darkModeToggle = document.querySelector('.dark-mode-toggle');
     const body = document.body;
     const darkModeText = document.getElementById('dark-mode-text');
